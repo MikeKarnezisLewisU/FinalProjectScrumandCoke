@@ -13,19 +13,24 @@
     -webkit-text-fill-color: rgb(255, 255, 255);
 }
 
+/*CSS for the final project proposal header, below it is the product name header*/
 #headingone {
     text-align: center;
     position: relative;
     font-size: 40px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+#basicHeader {
+    text-align: center;
+    position: relative;
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
-/*Using flexboxes*/
+/*Using flexboxes for the background of our title*/
 /*Used for the title header*/
 .flexbox-container {
-    display: flex; /*How we create the container, items become same*/
-    /*We now have the ability to chance all the items instead of each individual one as they're the same now*/
-    /*Items flexibly grow*/
+    display: flex; 
     top: 0;
     position: relative;
 }
@@ -42,4 +47,30 @@
     width: 1350px;
     top: 0;
     position: relative;
+}
+
+/*CSS for the list of team members*/
+.teamList, tr, td { /*Table of the web page information*/
+    border: 2px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    min-width: 250px;
+    min-height: 150px;
+    margin-left: 120px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background-color: red;
+    position: relative;
+}
+td {
+    color: white;
+}
+#listHeader {
+    color: red;
+    background-color: white;
+}
+
+/*CSS for the paragraphs*/
+p {
+    text-align: center;
 }
