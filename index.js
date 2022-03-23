@@ -1,5 +1,10 @@
+//SERVER SIDE JAVASCRIPT
+//Password Generator Final Project
+
+//Need requirements below in order for us to use easier functionality
 const express = require('express')
 app = express()
+const path = require('path');
 
 var url = require('url');
 var dt = require('./date-time');
@@ -9,13 +14,19 @@ const majorVersion = 1
 const minorVersion = 2
 
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
-app.use(express.static(__dirname + '/static'))
+app.use(express.static(__dirname + '/static/'))
 
 
 //DON'T DELETE; THIS IS FOR THE FINAL PROJECT PROPOSAL
-app.get('/proposal', (request, reponse) => {
-	app.use(express.static(__dirname + '/public/proposal'))
-    res.sendFile(path.join(__dirname + '/public/proposal/index.html'))
+app.get('/proposal', (request, response) => {
+	app.use(express.static(__dirname + '/proposal'))
+    response.sendFile(path.join(__dirname + '/proposal/index.html'))
+})
+
+//DON'T DELETE; THIS IS THE HEALTH INSURANCE SITE WE NEEDED TO ATTACH
+app.get('/health', (request, response) => {
+	app.use(express.static(__dirname + '/static/health/public'))
+    response.sendFile(path.join(__dirname + '/static/health/public/index.html'))
 })
 
 // The app.get functions below are being processed in Node.js running on the server.
