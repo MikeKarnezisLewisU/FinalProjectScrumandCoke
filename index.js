@@ -11,6 +11,13 @@ const minorVersion = 2
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static(__dirname + '/static'))
 
+
+//DON'T DELETE; THIS IS FOR THE FINAL PROJECT PROPOSAL
+app.get('/proposal', (request, reponse) => {
+	app.use(express.static(__dirname + '/public/proposal'))
+    res.sendFile(path.join(__dirname + '/public/proposal/index.html'))
+})
+
 // The app.get functions below are being processed in Node.js running on the server.
 // Implement a custom About page.
 app.get('/about', (request, response) => {
