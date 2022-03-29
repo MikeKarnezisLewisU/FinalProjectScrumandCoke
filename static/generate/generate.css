@@ -42,7 +42,7 @@ body {
     position: relative;
 }
 
-/*Our flexbox items*/
+/*Our flexbox items for the main title*/
 .flexbox-item {
     margin: 0px;
     border: 3px solid black;
@@ -56,11 +56,4 @@ body {
     position: relative;
 }
 
-
-img{
-    position: relative; 
-    text-align: center;
-    top: -150px;
-    left: 1%;
-    max-width: 3%;
-}
+/*Flexbox for where the user will enter parameters*/
