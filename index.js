@@ -16,7 +16,6 @@ const minorVersion = 2
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static(__dirname + '/static/'))
 
-
 //DON'T DELETE; THIS IS FOR THE FINAL PROJECT PROPOSAL
 app.get('/proposal', (request, response) => {
 	app.use(express.static(__dirname + '/proposal'))
@@ -29,7 +28,13 @@ app.get('/health', (request, response) => {
     response.sendFile(path.join(__dirname + '/health/index.html'))
 })
 
-// The app.get functions below are being processed in Node.js running on the server.
+//DON'T DELETE; THIS IS THE GENERATOR PAGE
+app.get('/generate', (request, response) => {
+	app.use(express.static(__dirname + '/generate'))
+    response.sendFile(path.join(__dirname + '/generate/index.html'))
+})
+
+// The app.get functions below are being processed in Node.js running on the server. (CLASS EXAMPLES)
 // Implement a custom About page.
 app.get('/about', (request, response) => {
 	console.log('Calling "/about" on the Node.js server.')
