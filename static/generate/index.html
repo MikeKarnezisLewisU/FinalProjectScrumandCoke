@@ -38,7 +38,65 @@
             <h1 id="paramTitle">Parameters</h1>
         </div>
     </div>
+
+    <!--Parameter for how many characters the user wants to use-->
+    <div class="passLength">
+        <label id="passLen">Password Length:</label>
+        <select id="lengthID">
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+        </select>
+        <br>
+    </div>
+
+    <!--Parameter for if the user wants any uppercase characters (0 for no, 1 for yes)-->
+    <div class="uppercaseSelection">
+        <label id="uppercase">Include Uppercase Characters:</label>
+        <select id="uppercaseID">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br>
+    </div>
+
+    <!--Parameter for if the user wants any special characters (0 for no, 1 for yes)-->
+    <div class="specialCharSelection">
+        <label id="specialChar">Include Special Characters:</label>
+        <select id="specialCharID">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br>
+    </div>
+
+    <!--Parameter for if the user wants any numbers (0 for no, 1 for yes)-->
+    <div class="numberSelection">
+        <label id="numbers">Include Numbers:</label>
+        <select id="numbersID">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <br>
+    </div>
+
+    <!--Textbox where the password will be generated to-->
+    <input type="text" id="genPassword" name="password" value="Generated pswd" readonly><br>
+
+    <!--Button to generate a password-->
+    <button type="button" id="btnGenerate">Generate</button>
     </header>
-    
+
    </body>
 </html>
