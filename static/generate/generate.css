@@ -57,3 +57,36 @@ body {
 }
 
 /*Flexbox for where the user will enter parameters*/
+/*Our flexbox items for the main title*/
+.genContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(228, 224, 255);
+    justify-content: center;
+    justify-items: center;
+}
+/*Container for then header*/
+.genContainer-item-1 {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 300px;
+    
+}
+/*Container for the parameters*/
+.genContainer-item-2 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(160, 155, 182);
+    margin-top: 10%;
+    min-height: 400px;
+    width: 800px;
+}
+/*Parameters title*/
+#paramTitle {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+}
+
