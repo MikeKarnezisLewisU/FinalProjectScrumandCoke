@@ -144,9 +144,19 @@ body {
 /*CSS for the generated password*/
 #genPassword {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
     position: absolute;
     top: 650px;
     left: 520px;
     width: 300px;
+}
+
+/*CSS for the generate button*/
+#btnGenerate {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    position: absolute;
+    top: 735px;
+    left: 620px;
 }
 
