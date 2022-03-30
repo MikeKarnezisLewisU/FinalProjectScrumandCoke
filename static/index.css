@@ -41,7 +41,7 @@ body {
 }
 
 .flexbox-item-1 {/*item 1*/
-    min-height: 150px;
+    min-height: 210px;
     width: 1350px;
     top: 0;
     position: relative;
