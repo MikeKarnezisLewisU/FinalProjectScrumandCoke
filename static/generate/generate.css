@@ -179,4 +179,41 @@ body {
     left: 620px;
 }
 
+/*CSS For the navbar*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(45, 11, 238);
+    width: 17.5%;
+    position: absolute;
+    top: 175.4px;
+    left: 11.3px;
 
+  }
+  
+
+li {
+    float: left;
+  }
+
+li a {
+    display: block;
+    color: black;
+    background-color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+li a:hover {
+    background-color: black;
+    color: white;
+  }
+
+  /*Github information*/
+.github {
+    position: absolute;
+    top: 1.2%;
+}
