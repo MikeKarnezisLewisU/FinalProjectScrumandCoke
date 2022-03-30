@@ -140,13 +140,35 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
 }
+/*CSS for the day of the week parameter*/
+.daySelection {
+    position: absolute;
+    top: 660px;
+    left: 400px;
+}
+/*CSS for the days label*/
+#days {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+/*CSS for the time of the day parameter*/
+.dayTime {
+    position: absolute;
+    top: 660px;
+    left: 700px;
+}
+/*CSS for the time of the day label*/
+#time {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
 
 /*CSS for the generated password*/
 #genPassword {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     position: absolute;
-    top: 650px;
+    top: 710px;
     left: 520px;
     width: 300px;
 }
@@ -156,7 +178,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     position: absolute;
-    top: 735px;
+    top: 770px;
     left: 620px;
 }
+
 
