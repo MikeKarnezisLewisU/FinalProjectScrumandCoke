@@ -34,12 +34,10 @@ app.get('/generate', (request, response) => {
     response.sendFile(path.join(__dirname + '/generate/index.html'))
 })
 
-// The app.get functions below are being processed in Node.js running on the server. (CLASS EXAMPLES)
-// Implement a custom About page.
+//DON'T DELETE; THIS IS THE HEALTH INSURANCE SITE WE NEEDED TO ATTACH
 app.get('/about', (request, response) => {
-	console.log('Calling "/about" on the Node.js server.')
-	response.type('text/plain')
-	response.send('About Node.js on Azure Template.')
+	app.use(express.static(__dirname + '/about'))
+    response.sendFile(path.join(__dirname + '/about/index.html'))
 })
 
 app.get('/version', (request, response) => {
