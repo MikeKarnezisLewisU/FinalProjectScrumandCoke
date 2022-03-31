@@ -116,6 +116,19 @@ body {
     font-weight: bold;
 }
 
+
+/*CSS for including letters*/
+.letterSelection {
+    position: absolute;
+    top: 600px;
+    left: 700px;
+}
+/*CSS for letter parameter label*/
+#letter {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
 /*CSS for including any special characters*/
 .specialCharSelection {
     position: absolute;
@@ -163,7 +176,8 @@ body {
     font-weight: bold;
 }
 
-/*CSS for the generated password*/
+/*CSS for the generated password ORIGINAL TEXTBOX VERSION*/ 
+/*
 #genPassword {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
@@ -171,6 +185,29 @@ body {
     top: 770px;
     left: 520px;
     width: 300px;
+}
+*/
+
+
+/*CSS for the text preceding the generated password*/
+#pretense {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    position: absolute;
+    top: 770px;
+    left: 320px;
+    width: 300px;
+
+}
+/*CSS for the generated password*/
+#generate_output {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    position: absolute;
+    top: 770px;
+    left: 620px;
+    width: 300px;
+
 }
 
 /*CSS for the generate button*/

@@ -11,6 +11,7 @@
  </head>
  <body>
 
+
     <!--Title-->
     <header>
     <div class="flexbox-container">
@@ -60,37 +61,102 @@
         <br>
     </div>
 
-    <!--Parameter for if the user wants any uppercase characters (0 for no, 1 for yes)-->
-    <div class="uppercaseSelection">
-        <label id="uppercase">Include Uppercase Characters:</label>
-        <select id="uppercaseID">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
+    <!--Parameter for how many letters the user wants -->
+    <div class="letterSelection">
+        <label id="letter">How Many Letters?</label>
+        <input type="text" id="myLetterText" value="1" style="width: 15px;">
+        <!--
+        <select id="letterID">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
         </select>
+        -->
         <br>
     </div>
+    
 
     <!--Parameter for if the user wants any special characters (0 for no, 1 for yes)-->
     <div class="specialCharSelection">
-        <label id="specialChar">Include Special Characters:</label>
+        <label id="specialChar">How Many Special Characters?</label>
+        <input type="text" id="mySpecialsText" value="1" style="width: 15px;">
+        <!--
         <select id="specialCharID">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
         </select>
+        -->
         <br>
     </div>
 
     <!--Parameter for if the user wants any numbers (0 for no, 1 for yes)-->
     <div class="numberSelection">
-        <label id="numbers">Include Numbers:</label>
+        <label id="numbers">How Many Numbers?</label>
+        <input type="text" id="myNumText" value="1" style="width: 15px;">
+        <!--
         <select id="numbersID">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
         </select>
+        -->
         <br>
     </div>
 
     <!--Parameter for the day of the week-->
+    <!--
     <div class="daySelection">
         <label id="days">Day of the week:</label>
         <select id="dayID">
@@ -104,8 +170,10 @@
         </select>
         <br>
     </div>
+    -->
 
     <!--Parameter for the time of the day-->
+    <!--
     <div class="dayTime">
         <label id="time">Day of the week:</label>
         <select id="timeID">
@@ -115,12 +183,14 @@
         </select>
         <br>
     </div>
+    -->
 
     <!--Textbox where the password will be generated to-->
-    <input type="text" id="genPassword" name="password" value="Generated pswd" readonly><br>
+    <!-- <input type="text" id="genPassword" name="password" value="Generated pswd" readonly><br> -->
+    <span id="pretense">Your generated password is: </span><span id="generate_output"></span>
 
     <!--Button to generate a password-->
-    <button type="button" id="btnGenerate">Generate</button>
+    <button type="button" id="btnGenerate" onclick="generatePassword()">Generate</button>
     </header>
 
     <!--Github information-->
@@ -133,5 +203,113 @@
         <li><a href="https://finalprojectscrumandcoke.azurewebsites.net/about/" id="about">About</a></li>
    </ul>
 
+
+
+
+
+        <script>
+            /**
+            * Returns a random integer between min (inclusive) and max (inclusive).
+            * The value is no lower than min (or the next integer greater than min
+            * if min isn't an integer) and no greater than max (or the next integer
+            * lower than max if max isn't an integer).
+            * Using Math.round() will give you a non-uniform distribution!
+            */
+            function getRandomInt(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            function generatePassword() {
+                const letters = document.getElementById("myLetterText").value
+                const digits = document.getElementById("myNumText").value
+                const specials = document.getElementById("mySpecialsText").value
+
+                console.log("Number of letters that will be in the password is: " + letters)
+                console.log("Number of digits that will be in the password is: " + digits)
+                console.log("Number of specials that will be in the password is: " + specials)
+
+                const total_length = parseInt(letters) + parseInt(digits) + parseInt(specials)
+                console.log("The total length of the generated password will be: " + total_length)
+
+                var arr = new Array(total_length)
+                var visited_positions = new Array(total_length)
+                console.log("Random unit is: " + getRandomInt(1,total_length))
+                var cycle = 0; 
+                //Adding digits to the primary array vvv
+                while (cycle != parseInt(digits)) {
+                    //Get Placement 
+                    var placement = getRandomInt(1,total_length); 
+                    console.log("Placement value is: " + placement)
+                    //Get the digit that will be placed in said position vvv
+                    var misc_digit = getRandomInt(1,10); 
+                    console.log("Misc digit is: " + misc_digit)
+                    //Continue if visited positions array shows that the placement position is not visited in main array
+                    if (!(visited_positions.includes(placement))) {
+                        visited_positions[placement] = placement;
+                        arr[placement] = misc_digit;
+                        console.log("Not visited");
+                        console.log("Visited positions are: ") + console.dir(visited_positions);
+                        console.log("Array is: ") + console.dir(arr);
+                        cycle = cycle + 1; 
+                    }     
+                }
+                cycle = 0; 
+                while (cycle != parseInt(letters)) {
+                    //Get placement 
+                    var placement = getRandomInt(1,total_length); 
+                    console.log("Placement value is: " + placement)
+                    //Letters array to pull from
+                    var ltrs = ['a','b','c','d']; 
+                    console.log(ltrs.length)
+                    //Get the digit that will be used to find the letter placed in chosen position
+                    var misc_digit = getRandomInt(0,ltrs.length - 1);
+                    //Retireve letter
+                    var misc_letter = ltrs[misc_digit]; 
+                    console.log("Retrieved letter: " + misc_letter); 
+                    //Continue if visited positions array shows that the placement position is not visited in main array
+                    if (!(visited_positions.includes(placement))) {
+                        visited_positions[placement] = placement;
+                        //Insert letter into main array at placement position
+                        arr[placement] = misc_letter;
+                        console.log("Not visited");
+                        console.log("Visited positions are: ") + console.dir(visited_positions);
+                        console.log("Array is: ") + console.dir(arr);
+                        cycle = cycle + 1; 
+                    }
+
+                }
+                cycle = 0; 
+                while (cycle != parseInt(specials)) {
+                    //Get placement 
+                    var placement = getRandomInt(1,total_length); 
+                    console.log("Placement value is: " + placement)
+                    //Special characters array to pull from 
+                    var spcials = ['!','@','#','$','%']; 
+                    console.log(spcials.length); 
+                    //Get the digit that will be used to find the special character placed in chosen position
+                    var misc_digit = getRandomInt(0,spcials.length - 1);
+                    //Retrieve Special Character 
+                    var misc_special = spcials[misc_digit]; 
+                    console.log("Retrieved special character: " + misc_special); 
+                    //Continue if visited positions array shows that the placement position is not visited in main array
+                    if (!(visited_positions.includes(placement))) {
+                        visited_positions[placement] = placement; 
+                        //Insert special character into main array at placement position
+                        arr[placement] = misc_special;
+                        console.log("Not visited");
+                        console.log("Visited positions are: ") + console.dir(visited_positions);
+                        console.log("Array is: ") + console.dir(arr);
+                        cycle = cycle + 1; 
+
+
+                    }
+
+                }
+                output_text = arr.join('').toString(); 
+                document.getElementById("generate_output").innerHTML = output_text;
+            }
+            generatePassword(); 
+        </script>
    </body>
 </html>
