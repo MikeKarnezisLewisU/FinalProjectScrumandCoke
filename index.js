@@ -3,7 +3,7 @@
 
 //Need requirements below in order for us to use easier functionality
 const express = require('express')
-app = express()
+const app = express()
 const path = require('path');
 
 var url = require('url');
@@ -16,7 +16,6 @@ const minorVersion = 2
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static(__dirname + '/static/'))
 
-
 //DON'T DELETE; THIS IS FOR THE FINAL PROJECT PROPOSAL
 app.get('/proposal', (request, response) => {
 	app.use(express.static(__dirname + '/proposal'))
@@ -25,16 +24,20 @@ app.get('/proposal', (request, response) => {
 
 //DON'T DELETE; THIS IS THE HEALTH INSURANCE SITE WE NEEDED TO ATTACH
 app.get('/health', (request, response) => {
-	app.use(express.static(__dirname + '/static/health/public'))
-    response.sendFile(path.join(__dirname + '/static/health/public/index.html'))
+	app.use(express.static(__dirname + '/health'))
+    response.sendFile(path.join(__dirname + '/health/index.html'))
 })
 
-// The app.get functions below are being processed in Node.js running on the server.
-// Implement a custom About page.
+//DON'T DELETE; THIS IS THE GENERATOR PAGE
+app.get('/generate', (request, response) => {
+	app.use(express.static(__dirname + '/generate'))
+    response.sendFile(path.join(__dirname + '/generate/index.html'))
+})
+
+//DON'T DELETE; THIS IS THE HEALTH INSURANCE SITE WE NEEDED TO ATTACH
 app.get('/about', (request, response) => {
-	console.log('Calling "/about" on the Node.js server.')
-	response.type('text/plain')
-	response.send('About Node.js on Azure Template.')
+	app.use(express.static(__dirname + '/about'))
+    response.sendFile(path.join(__dirname + '/about/index.html'))
 })
 
 app.get('/version', (request, response) => {
@@ -61,22 +64,40 @@ app.get('/add-two-integers', (request, response) => {
 	response.send(sum.toString())
 })
 
-// Template for calculating BMI using height in feet/inches and weight in pounds.
+//OUR HEALTH INSURANCE CALCULATOR BMI STUFF NEEDED (couldn't get it to work on two different servers.)
+//Calculating the BMI
 app.get('/calculate-bmi', (request, response) => {
 	console.log('Calling "/calculate-bmi" on the Node.js server.')
 	var inputs = url.parse(request.url, true).query
-	const heightFeet = parseInt(inputs.feet)
 	const heightInches = parseInt(inputs.inches)
 	const weight = parseInt(inputs.lbs)
-
-	console.log('Height:' + heightFeet + '\'' + heightInches + '\"')
+	
+    //Check if the height and weight went through fine
+	console.log('Height:' + heightInches)
 	console.log('Weight:' + weight + ' lbs.')
 
-	// Todo: Implement unit conversions and BMI calculations.
-	// Todo: Return BMI instead of Todo message.
+	//Implement unit conversions and BMI calculations.
+	const weightKilo = weight * 0.45359237
+	const sqrHeight = (heightInches * 0.0254)**2
+	//Return BMI instead of Todo message.
+	const BMI = weightKilo / sqrHeight
 
 	response.type('text/plain')
-	response.send('Todo: Implement "/calculate-bmi"')
+	strBMI = BMI.toString()
+	response.send(strBMI)
+	//response.send(BMI.toString())
+})
+//INSERT GET FUNCTION FOR DOING THE COMPARISONS (INFO FROM CALCULATE POINTS!)
+//Calculating the Blood Pressure category 
+app.get('/calculate-bp',(request,response) => {
+	console.log('Calling "/calculate-bp" on the Node.js server')
+	var inputs = url.parse(request.url,true).query
+	const systolic = parseInt(inputs.systolic)
+	const diastolic = parseInt(inputs.diastolic)
+	response.type('text/plain')
+	strCategoryPoints = categoryPoints.toString()
+	response.send(strCategoryPoints)
+	
 })
 
 // Test a variety of functions.
