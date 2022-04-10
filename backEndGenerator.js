@@ -66,7 +66,7 @@ function ShuffleArray(tempArray, tempShuffled, keyNum){
 }
 
 app.get('/sendInput', (request, response) => {
-	console.log('Calling "/sendInput" on the Node.js server.')
+	console.log('Calling "/send-Input" on the Node.js server.')
 	var inputs = url.parse(request.url, true).query
 	const userInput1 = parseInt(inputs.letters)
 	const userInput2 = parseInt(inputs.digits)
