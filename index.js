@@ -179,6 +179,11 @@ app.listen(port, () => console.log(
   `press Ctrl-C to terminate.`)
 )
 
+/*
+* takes input from generate/index
+* currently working on trying to get the fetch function and getting variables between html and JS
+* remember to import code from backEndGenerator after solving the fetch problem 
+*/
 app.get('/send-Input', (request, response) => {
 	console.log('Calling "/send-Input" on the Node.js server.')
 	var inputs = url.parse(request.url, true).query

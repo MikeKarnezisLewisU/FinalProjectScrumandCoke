@@ -1,3 +1,9 @@
+/*
+* Temporary file to hold the generator for conveniance sake
+* May or may not delete this in the end
+* if not used, delete for security reasons
+*/
+
 const express = require('express')
 const app = express()
 const path = require('path');
