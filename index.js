@@ -178,3 +178,26 @@ app.listen(port, () => console.log(
   `Express started at \"http://localhost:${port}\"\n` +
   `press Ctrl-C to terminate.`)
 )
+
+/*
+* takes input from generate/index
+* currently working on trying to get the fetch function and getting variables between html and JS
+* remember to import code from backEndGenerator after solving the fetch problem 
+*/
+app.get('/send-Input', (request, response) => {
+	console.log('Calling "/send-Input" on the Node.js server.')
+	var inputs = url.parse(request.url, true).query
+	const userInput1 = parseInt(inputs.letters)
+	const userInput2 = parseInt(inputs.digits)
+    const userInput3 = parseInt(inputs.specials)
+    const userInput4 = parseInt(inputs.leng)
+    //Check if the height and weight went through fine
+	console.log('letters:' + userInput1)
+	console.log('numbers:' + userInput2)
+    console.log('specials:' + userInput3)
+	console.log('length:' + userInput4)
+	
+    response.type('text/plain')
+	let password_gen = "password?"
+	response.send(password_gen)
+})

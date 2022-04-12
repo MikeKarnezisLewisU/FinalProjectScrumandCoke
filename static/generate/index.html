@@ -26,6 +26,9 @@
     <!--Directions--> 
     <h1 id="directions">Fill in the required parameters below in order<br>
         to generate a password using our generator tool.</h1>
+    </header>
+
+
 
     <!--Area will user will enter the paramters needed to generate a password-->
     <div class ="genContainer">
@@ -190,8 +193,7 @@
     <span id="pretense">Your generated password is: </span><span id="generate_output"></span>
 
     <!--Button to generate a password-->
-    <button type="button" id="btnGenerate" onclick="generatePassword()">Generate</button>
-    </header>
+    <button type="button" id="btnGenerate" onclick="sendCommand()">Send</button> 
 
     <!--Github information-->
     <a class="github" href="https://github.com/MikeKarnezisLewisU/FinalProjectScrumandCoke"><img src="github.svg"></a>
@@ -209,107 +211,35 @@
 
         <script>
             /**
-            * Returns a random integer between min (inclusive) and max (inclusive).
-            * The value is no lower than min (or the next integer greater than min
-            * if min isn't an integer) and no greater than max (or the next integer
-            * lower than max if max isn't an integer).
-            * Using Math.round() will give you a non-uniform distribution!
-            */
-            function getRandomInt(min, max) {
-                min = Math.ceil(min);
-                max = Math.floor(max);
-                return Math.floor(Math.random() * (max - min + 1)) + min;
+            * sends 4 parameters to the generator 
+            * retrieves generated password from sever end
+            * No Math allowed script side
+            */ 
+
+            async function sendCommand(){
+                let password = await sendInput()
+                document.getElementById("generate_output").innerHTML = password
+
             }
-            function generatePassword() {
+
+            /* 
+            * WARNING fetch command fails suspecting error with recognizing the js file
+            * ||Uncaught TypeError TypeError: Failed to fetch||
+            */
+            async function sendInput(){
                 const letters = document.getElementById("myLetterText").value
                 const digits = document.getElementById("myNumText").value
                 const specials = document.getElementById("mySpecialsText").value
+                const theLeng = document.getElementById("lengthID").value
+                const generated = document.getElementById("generate_output").value
+                const toSend = [letters, digits, specials, theLeng]
+                console.log("info to send to serverside for generating:",toSend)
 
-                console.log("Number of letters that will be in the password is: " + letters)
-                console.log("Number of digits that will be in the password is: " + digits)
-                console.log("Number of specials that will be in the password is: " + specials)
-
-                const total_length = parseInt(letters) + parseInt(digits) + parseInt(specials)
-                console.log("The total length of the generated password will be: " + total_length)
-
-                var arr = new Array(total_length)
-                var visited_positions = new Array(total_length)
-                console.log("Random unit is: " + getRandomInt(1,total_length))
-                var cycle = 0; 
-                //Adding digits to the primary array vvv
-                while (cycle != parseInt(digits)) {
-                    //Get Placement 
-                    var placement = getRandomInt(1,total_length); 
-                    console.log("Placement value is: " + placement)
-                    //Get the digit that will be placed in said position vvv
-                    var misc_digit = getRandomInt(1,10); 
-                    console.log("Misc digit is: " + misc_digit)
-                    //Continue if visited positions array shows that the placement position is not visited in main array
-                    if (!(visited_positions.includes(placement))) {
-                        visited_positions[placement] = placement;
-                        arr[placement] = misc_digit;
-                        console.log("Not visited");
-                        console.log("Visited positions are: ") + console.dir(visited_positions);
-                        console.log("Array is: ") + console.dir(arr);
-                        cycle = cycle + 1; 
-                    }     
-                }
-                cycle = 0; 
-                while (cycle != parseInt(letters)) {
-                    //Get placement 
-                    var placement = getRandomInt(1,total_length); 
-                    console.log("Placement value is: " + placement)
-                    //Letters array to pull from
-                    var ltrs = ['a','b','c','d']; 
-                    console.log(ltrs.length)
-                    //Get the digit that will be used to find the letter placed in chosen position
-                    var misc_digit = getRandomInt(0,ltrs.length - 1);
-                    //Retireve letter
-                    var misc_letter = ltrs[misc_digit]; 
-                    console.log("Retrieved letter: " + misc_letter); 
-                    //Continue if visited positions array shows that the placement position is not visited in main array
-                    if (!(visited_positions.includes(placement))) {
-                        visited_positions[placement] = placement;
-                        //Insert letter into main array at placement position
-                        arr[placement] = misc_letter;
-                        console.log("Not visited");
-                        console.log("Visited positions are: ") + console.dir(visited_positions);
-                        console.log("Array is: ") + console.dir(arr);
-                        cycle = cycle + 1; 
-                    }
-
-                }
-                cycle = 0; 
-                while (cycle != parseInt(specials)) {
-                    //Get placement 
-                    var placement = getRandomInt(1,total_length); 
-                    console.log("Placement value is: " + placement)
-                    //Special characters array to pull from 
-                    var spcials = ['!','@','#','$','%']; 
-                    console.log(spcials.length); 
-                    //Get the digit that will be used to find the special character placed in chosen position
-                    var misc_digit = getRandomInt(0,spcials.length - 1);
-                    //Retrieve Special Character 
-                    var misc_special = spcials[misc_digit]; 
-                    console.log("Retrieved special character: " + misc_special); 
-                    //Continue if visited positions array shows that the placement position is not visited in main array
-                    if (!(visited_positions.includes(placement))) {
-                        visited_positions[placement] = placement; 
-                        //Insert special character into main array at placement position
-                        arr[placement] = misc_special;
-                        console.log("Not visited");
-                        console.log("Visited positions are: ") + console.dir(visited_positions);
-                        console.log("Array is: ") + console.dir(arr);
-                        cycle = cycle + 1; 
-
-
-                    }
-
-                }
-                output_text = arr.join('').toString(); 
-                document.getElementById("generate_output").innerHTML = output_text;
+                const response = await fetch('/send-Input?password_gen='+generated)
+                const responseText = await response.text()
+                console.log("Generated Password:",responseText)
+                return responseText
             }
-            generatePassword(); 
         </script>
    </body>
 </html>
