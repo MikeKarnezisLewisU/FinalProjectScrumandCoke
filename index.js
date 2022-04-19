@@ -159,6 +159,158 @@ app.get('/batman', (request, response) => {
 	response.send(JSON.stringify(spiderMan, null, 4))
 })
 
+/* ________________________________
+  |this is for the final project   | 
+  |________________________________|*/
+
+app.get('/send-Input', (request, response) => {
+	console.log('Calling "/send-Input" on the Node.js server.')
+	var inputs = url.parse(request.url,true).query
+	const letters = parseInt(inputs.letters)
+	const digits = parseInt(inputs.digits)
+    const specials = parseInt(inputs.specials)
+    const theLeng = parseInt(inputs.theLeng)
+    //Check 
+	console.log('letters:' + letters)
+	console.log('numbers:' + digits)
+    console.log('specials:' + specials)
+	console.log('theLeng:' + theLeng)
+
+	const _D= new Date()
+	const _Year = _D.getFullYear()
+	const _Month = _D.getMonth()
+	const _day = _D.getDate()
+	console.log(_Year + _Month + _day)
+
+	const _password = generating(letters, digits, specials, theLeng)
+	
+    response.type('text/plain')
+	let password_gen = _password.toString()
+	response.send(password_gen)
+})
+// Pool of characters to create passwords from
+const lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"];
+const upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
+const nums = ["0", "1", "3", "4", "5", "6", "7", "8", "9"];
+const special = ["!", "@", "#", "$", "%", "&", "*"];
+
+const lower2 = ["a", "b", "d", "f", "g", "h", "j", "k"];
+const upper2 = ["A", "C", "D", "E", "F", "G", "H", "J"];
+const nums2 = ["0", "3", "4", "5", "6", "8", "9"];
+const special2 = ["!", "#", "$", "%", "&"];
+
+const lower3 = ["d", "e", "f", "g", "h", "i", "j", "k"];
+const upper3 = ["A", "B", "C", "D", "E", "I", "J", "K"];
+const nums3 = ["3", "4", "5","0", "1", "8", "9"];
+const special3 = [ "#", "@", "%", "&", "*", "$","!"];
+
+const Pool1 = [lower, upper, nums, special];
+const Pool2 = [lower2, upper2, nums2, special2];
+const Pool3 = [lower3, upper3, nums3, special3];
+const PoolArr = [Pool1, Pool2, Pool3];
+
+function ShuffleArray(tempArray, tempShuffled, keyNum){
+	console.log(tempShuffled)
+    var _tempArray = [];
+    var _tempShuffled = [];
+	_tempShuffled = tempShuffled;
+    let leng = tempArray.length;
+
+    let x = 0;
+    let positionX = 0;
+    if (leng != 0){
+        while (x < keyNum){
+            if (positionX + 1 < leng){
+                ++positionX;
+            } else {
+                positionX = 0;
+            }
+            ++x;
+        }
+        for (let i = 0; i < leng; ++i){
+            if (i == positionX){
+                _tempShuffled.push(tempArray[i]);
+            } else {
+                _tempArray.push(tempArray[i]);
+            }
+        }
+        return ShuffleArray(_tempArray, _tempShuffled, keyNum);
+    }
+    return _tempShuffled
+}
+function generating(param1, param2, param3, param4){
+	const _D= new Date()
+	const _Year = _D.getFullYear()
+	const _Month = _D.getMonth()
+	const _day = _D.getDate()
+	const _seconds = _D.getMilliseconds()
+	console.log(_Year + _Month + _day)
+
+	const currentPool = createPool(_Year, _Month)
+	const arrEmpty = []
+	const lowerLetterPool = ShuffleArray(PoolArr[currentPool[0]][0], arrEmpty, _seconds)
+	//const upperLetterPool = ShuffleArray(PoolArr[currentPool[1][1], arrEmpty, _day)
+	const upperLetterPool = ShuffleArray(PoolArr[currentPool[1]][1], _day)
+	const numPool = ShuffleArray(PoolArr[currentPool[2]][2], arrEmpty, _day)
+	const specialPool = ShuffleArray(PoolArr[currentPool[3]][3], arrEmpty, _day)
+	let _password = ""
+
+	let i = 0
+	while (i < param4){
+		if (param1 >= 1 && i == 0){
+			_password = _password + upperLetterPool[i].toString()
+		} else if (param2 >= 1 && i == 1){
+			_password = _password + numPool[i].toString()
+		} else  if (param3 >= 1 && i == 2){
+			_password = _password + specialPool[i].toString()
+		} else {
+			_password = _password + lowerLetterPool[i].toString()
+		}
+		i = i + 1
+	}
+	return _password
+}
+
+function createPool(y, m){
+	const poolNum = (y/m) % 64
+	let lowerTemp = 0
+	let upperTemp = 0
+	let numTemp = 0
+	let specialTemp = 0
+	let i = 0
+	while ( i < poolNum){
+		if (lowerTemp == 2){
+			if (upperTemp != 2){
+				lowerTemp = 0
+				upperTemp = upperTemp + 1
+			}	
+			if (upperTemp == 2){
+				if (numTemp != 2){
+					upperTemp = 0
+					numTemp = numTemp + 1
+				}	
+				else {
+					if (specialTemp != 2){
+						numTemp = 0
+					}	
+					specialTemp = specialTemp + 1	
+				}
+			}
+		}
+		else{
+			lowerTemp = lowerTemp + 1
+		}
+		i = i + 1 
+	}
+
+	const createdPool = [lowerTemp, upperTemp, numTemp, specialTemp]
+	console.log('createdPool is: ' + createdPool)
+
+	return createdPool
+}
+
+// End of final project specific code
+
 // Custom 404 page.
 app.use((request, response) => {
   response.type('text/plain')
@@ -184,20 +336,3 @@ app.listen(port, () => console.log(
 * currently working on trying to get the fetch function and getting variables between html and JS
 * remember to import code from backEndGenerator after solving the fetch problem 
 */
-app.get('/send-Input', (request, response) => {
-	console.log('Calling "/send-Input" on the Node.js server.')
-	var inputs = url.parse(request.url, true).query
-	const userInput1 = parseInt(inputs.letters)
-	const userInput2 = parseInt(inputs.digits)
-    const userInput3 = parseInt(inputs.specials)
-    const userInput4 = parseInt(inputs.leng)
-    //Check if the height and weight went through fine
-	console.log('letters:' + userInput1)
-	console.log('numbers:' + userInput2)
-    console.log('specials:' + userInput3)
-	console.log('length:' + userInput4)
-	
-    response.type('text/plain')
-	let password_gen = "password?"
-	response.send(password_gen)
-})

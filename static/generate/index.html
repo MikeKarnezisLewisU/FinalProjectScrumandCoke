@@ -193,7 +193,7 @@
     <span id="pretense">Your generated password is: </span><span id="generate_output"></span>
 
     <!--Button to generate a password-->
-    <button type="button" id="btnGenerate" onclick="sendCommand()">Send</button> 
+    <button type="button" id="btnGenerate" onclick="sendCommand()" value="run external javascript">Send</button> 
 
     <!--Github information-->
     <a class="github" href="https://github.com/MikeKarnezisLewisU/FinalProjectScrumandCoke"><img src="github.svg"></a>
@@ -231,11 +231,9 @@
                 const digits = document.getElementById("myNumText").value
                 const specials = document.getElementById("mySpecialsText").value
                 const theLeng = document.getElementById("lengthID").value
-                const generated = document.getElementById("generate_output").value
                 const toSend = [letters, digits, specials, theLeng]
                 console.log("info to send to serverside for generating:",toSend)
-
-                const response = await fetch('/send-Input?password_gen='+generated)
+                const response = await fetch('/send-Input?letters='+letters+'&digits='+digits+'&specials='+specials+'&theLeng='+theLeng)
                 const responseText = await response.text()
                 console.log("Generated Password:",responseText)
                 return responseText
