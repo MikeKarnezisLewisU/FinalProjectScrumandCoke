@@ -233,6 +233,7 @@
                 const theLeng = document.getElementById("lengthID").value
                 const generated = document.getElementById("generate_output").value
                 const toSend = [letters, digits, specials, theLeng]
+                console.log("generated variable:", generated)
                 console.log("info to send to serverside for generating:",toSend)
 
                 const response = await fetch('/send-Input?password_gen='+generated)
