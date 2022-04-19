@@ -11,7 +11,7 @@ const path = require('path');
 var url = require('url');
 var dt = require('./date-time');
 
-const port = process.env.PORT || 3000
+
 const majorVersion = 1
 const minorVersion = 2
 
@@ -71,7 +71,7 @@ function ShuffleArray(tempArray, tempShuffled, keyNum){
     return _tempShuffled; 
 }
 
-app.get('/sendInput', (request, response) => {
+/*app.get('/sendInput', (request, response) => {
 	console.log('Calling "/send-Input" on the Node.js server.')
 	var inputs = url.parse(request.url, true).query
 	const userInput1 = parseInt(inputs.letters)
@@ -87,4 +87,4 @@ app.get('/sendInput', (request, response) => {
     response.type('text/plain')
 	let password_gen = "password?"
 	response.send(password_gen)
-})
+})*/

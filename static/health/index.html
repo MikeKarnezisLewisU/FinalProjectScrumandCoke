@@ -152,18 +152,6 @@
             //Get height value (will be in inches), and weight value
             const heightInch = document.getElementById("heightID").value
             const weight = document.getElementById("weight").value
-            /* 
-                    done by Michael Karnezis
-                    I was intending to put all of the information into one functions because
-                    all calculations need to be done on the server side so this only requires
-                    the information to be parsed. 
-                    but I seem to have trouble running it locally to test any of my code
-
-            const alzheimers = document.getElementById("alzheimersID").value
-            const cancer = document.getElementById("cancerID").value
-            const diabetes = document.getElementById("diabetesID").value
-            const age = document.getElementById()("ageID").value
-            */
 
             // Approximate height and weight for a man in the US. (need to trim weight just incase user put spaces at beginning)
             const response = await fetch('/calculate-bmi?inches='+heightInch+'&lbs='+weight.trim())
