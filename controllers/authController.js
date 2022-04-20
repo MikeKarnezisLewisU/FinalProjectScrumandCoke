@@ -76,7 +76,7 @@ module.exports.signup_post = async (req, res) => {
         //Create the token right after a successful sign in
         const token = createToken(user._id)
         //Now place inside a cookie and send as part of response
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+        res.cookie('jwt', token, { maxAge: maxAge * 1000 })
 
         //Sends back json information of the user with an _id
         //Send the user id as a response to the front end
@@ -110,7 +110,7 @@ module.exports.login_post = async (req, res) => {
         //Create JWT for the user if they logged in
         const token = createToken(user._id)
         //Now place inside a cookie and send as part of response
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+        res.cookie('jwt', token, { maxAge: maxAge * 1000 })
         
         res.status(200).json({user: user._id }) //Return user ID if successfully logged in
     } catch (err) {
