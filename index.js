@@ -348,8 +348,9 @@ app.use((err, request, response, next) => {
   response.send('500 - Server Error')
 })
 
- 
+ /*
 app.listen(port, () => console.log(
   `Express started at \"http://localhost:${port}\"\n` +
   `press Ctrl-C to terminate.`)
 )
+*/
