@@ -1,20 +1,50 @@
 //SERVER SIDE JAVASCRIPT
 //Password Generator Final Project
+//MADE SOME OTHER JS FILES THAT INCLUDE INFORMATION FOR MIDDLEWARE, A CONTROLLER, AND THE AUTH ROUTES
+
+//This will be running on port 3000 if you want to test locally!!
 
 //Need requirements below in order for us to use easier functionality
 const express = require('express')
 const app = express()
 const path = require('path');
-
+const mongoose = require('mongoose')
 var url = require('url');
-var dt = require('./date-time');
-
 const port = process.env.PORT || 3000
 const majorVersion = 1
 const minorVersion = 2
-
+//For the authentication routes
+const authRoutes = require('./routes/authRoutes')
+//Use npm install cookie-parser to install cookie parser and use it with this
+const cookieParser = require('cookie-parser')
+//Used as a requirement to only show pages or page details according to this
+const { requireAuth, checkUser } = require('./middleware/authMiddleware')
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
-app.use(express.static(__dirname + '/static/'))
+app.use(express.static('static'))
+app.use(express.json()) //Takes data passed by user and attaches to request object in the handler
+app.use(cookieParser()) //Now we can access cookie methods
+
+//Set view for ejs
+app.set('view engine', 'ejs')
+
+//Connect to the database
+const dbURI = 'mongodb+srv://tommy12:tommy12@cluster0.24daz.mongodb.net/node-auth'
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then((result) => app.listen(3000))
+	.catch((err) => console.log(err))
+
+//Checks the user when every route runs
+app.get('*', checkUser)
+
+//DON'T DELETE; THIS IS FOR THE FINAL PROJECT PROPOSAL
+app.get('/', (request, response) => {
+	response.render('index.ejs')
+})
+
+//Page that should only be shown if a user is logged in
+app.get('/profile', requireAuth, (req, res) => {
+	res.render('profile.ejs')
+})
 
 //DON'T DELETE; THIS IS FOR THE FINAL PROJECT PROPOSAL
 app.get('/proposal', (request, response) => {
@@ -30,14 +60,12 @@ app.get('/health', (request, response) => {
 
 //DON'T DELETE; THIS IS THE GENERATOR PAGE
 app.get('/generate', (request, response) => {
-	app.use(express.static(__dirname + '/generate'))
-    response.sendFile(path.join(__dirname + '/generate/index.html'))
+	response.render('generate.ejs')
 })
 
 //DON'T DELETE; THIS IS THE HEALTH INSURANCE SITE WE NEEDED TO ATTACH
 app.get('/about', (request, response) => {
-	app.use(express.static(__dirname + '/about'))
-    response.sendFile(path.join(__dirname + '/about/index.html'))
+	response.render('about.ejs')
 })
 
 app.get('/version', (request, response) => {
@@ -159,11 +187,43 @@ app.get('/batman', (request, response) => {
 	response.send(JSON.stringify(spiderMan, null, 4))
 })
 
+//For the routing of authentication information
+app.use(authRoutes)
+
+
+/*
+//For getting and setting COOKIES
+//This will pop up at local/set-cookies
+app.get('/set-cookies', (req, res) => {
+	//Create a cookie to register in the browser (cookie, cookValue)
+	//Can be seen in website in storage cookies
+	//This data will be set and will stay until the browser gets closed
+	//res.setHeader('Set-Cookie', 'newUser=true') //Can be used in our code for using info to advantage
+
+	//Same as above code 
+	res.cookie('newUser', false) //Updates cookie if it exists
+	//maxAge how long it lasts (1000 ms, times 60, * 60, * 24, to get a day of cookie time when the browser is open)
+		//secure: true; only shows cookie with https connection
+		//httpOnly: true; can't access cookie from JS
+		//In real life only use https for authentication for security
+	res.cookie('isEmployee', true, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true })
+
+	res.send('you got the cookie!')
+})
+
+//Will take the cookie data we have and read the cookies we want to access using the name of cookie we give it in above
+app.get('/read-cookies', (req, res) => {
+	const cookies = req.cookies
+	console.log(cookies.newUser)
+
+	res.json(cookies)
+})
+*/
 /* ________________________________
   |this is for the final project   | 
   |________________________________|*/
 
-app.get('/send-Input', (request, response) => {
+  app.get('/send-Input', (request, response) => {
 	console.log('Calling "/send-Input" on the Node.js server.')
 	var inputs = url.parse(request.url,true).query
 	const letters = parseInt(inputs.letters)
@@ -271,45 +331,6 @@ function generating(param1, param2, param3, param4){
 	return _password
 }
 
-function createPool(y, m){
-	const poolNum = (y/m) % 64
-	let lowerTemp = 0
-	let upperTemp = 0
-	let numTemp = 0
-	let specialTemp = 0
-	let i = 0
-	while ( i < poolNum){
-		if (lowerTemp == 2){
-			if (upperTemp != 2){
-				lowerTemp = 0
-				upperTemp = upperTemp + 1
-			}	
-			if (upperTemp == 2){
-				if (numTemp != 2){
-					upperTemp = 0
-					numTemp = numTemp + 1
-				}	
-				else {
-					if (specialTemp != 2){
-						numTemp = 0
-					}	
-					specialTemp = specialTemp + 1	
-				}
-			}
-		}
-		else{
-			lowerTemp = lowerTemp + 1
-		}
-		i = i + 1 
-	}
-
-	const createdPool = [lowerTemp, upperTemp, numTemp, specialTemp]
-	console.log('createdPool is: ' + createdPool)
-
-	return createdPool
-}
-
-// End of final project specific code
 
 // Custom 404 page.
 app.use((request, response) => {
@@ -326,13 +347,9 @@ app.use((err, request, response, next) => {
   response.send('500 - Server Error')
 })
 
+/** 
 app.listen(port, () => console.log(
   `Express started at \"http://localhost:${port}\"\n` +
   `press Ctrl-C to terminate.`)
 )
-
-/*
-* takes input from generate/index
-* currently working on trying to get the fetch function and getting variables between html and JS
-* remember to import code from backEndGenerator after solving the fetch problem 
 */
