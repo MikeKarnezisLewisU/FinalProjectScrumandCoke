@@ -200,11 +200,24 @@
 
     <!--Navigation Bar-->
     <ul class="horzbar">
-        <li><a href="https://finalprojectscrumandcoke.azurewebsites.net/" id="home">Home</a></li>
-        <li><a href="https://finalprojectscrumandcoke.azurewebsites.net/generate/" id="generate">Generate</a></li>
-        <li><a href="https://finalprojectscrumandcoke.azurewebsites.net/about/" id="about">About</a></li>
-   </ul>
+        <li><a href="/" id="home">Home</a></li>
+        <li><a href="/generate" id="generate">Generate</a></li>
+        <li><a href="/about" id="about">About</a></li>
+  
+        <!--To go to the login page or signup page (need to make conditionally using ejs properties)-->
+        <% if (user) { %>
+            <li><a href="/profile" id="profile">Profile</a></li>
+            <li><a href="/logout" id="logout">Logout</a></li>
+        <% } else { %>
+            <li><a href="/login" id="login">Login</a></li>
+            <li><a href="/signup" id="signup">Sign Up</a></li>
+        <% } %>
+    </ul>
 
+    <!--Welcome the current user if they exist (must be conditional then)-->
+    <% if (user) { %>
+        <p id="welcomeUser">Welcome, <%= user.email %></p>
+    <% } %>
 
 
 
@@ -232,6 +245,7 @@
                 const specials = document.getElementById("mySpecialsText").value
                 const theLeng = document.getElementById("lengthID").value
                 const toSend = [letters, digits, specials, theLeng]
+                console.log("generated variable:", generated)
                 console.log("info to send to serverside for generating:",toSend)
                 const response = await fetch('/send-Input?letters='+letters+'&digits='+digits+'&specials='+specials+'&theLeng='+theLeng)
                 const responseText = await response.text()
