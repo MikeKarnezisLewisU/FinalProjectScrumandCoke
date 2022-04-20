@@ -28,7 +28,7 @@ app.use(cookieParser()) //Now we can access cookie methods
 app.set('view engine', 'ejs')
 
 //Connect to the database
-const dbURI = 'mongodb+srv://tommy12:tommy12@cluster0.24daz.mongodb.net/node-auth?retryWrites=true&w=majority'
+const dbURI = 'mongodb+srv://tommy122:tommy122@cluster0.24daz.mongodb.net/node-auth?retryWrites=true&w=majority'
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 /*
 
