@@ -10,7 +10,7 @@ const app = express()
 const path = require('path');
 const mongoose = require('mongoose')
 var url = require('url');
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 const majorVersion = 1
 const minorVersion = 2
 //For the authentication routes
