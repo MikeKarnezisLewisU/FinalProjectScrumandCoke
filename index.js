@@ -30,9 +30,10 @@ app.set('view engine', 'ejs')
 //Connect to the database
 const dbURI = 'mongodb+srv://tommy12:tommy12@cluster0.24daz.mongodb.net/node-auth'
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+/*
 	.then((result) => app.listen(3000))
 	.catch((err) => console.log(err))
-
+*/
 //Checks the user when every route runs
 app.get('*', checkUser)
 
@@ -347,9 +348,8 @@ app.use((err, request, response, next) => {
   response.send('500 - Server Error')
 })
 
-/** 
+ 
 app.listen(port, () => console.log(
   `Express started at \"http://localhost:${port}\"\n` +
   `press Ctrl-C to terminate.`)
 )
-*/
