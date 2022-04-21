@@ -273,9 +273,8 @@ const PoolArr = [Pool1, Pool2, Pool3];
 
 function ShuffleArray(tempArray, tempShuffled, keyNum){
 	console.log(tempShuffled)
-    var _tempArray = [];
-    var _tempShuffled = [];
-	_tempShuffled = tempShuffled;
+    _tempArray = [];
+    _tempShuffled = Array.from(tempShuffled);
     let leng = tempArray.length;
 
     let x = 0;
@@ -298,7 +297,7 @@ function ShuffleArray(tempArray, tempShuffled, keyNum){
         }
         return ShuffleArray(_tempArray, _tempShuffled, keyNum);
     }
-    return _tempShuffled
+    return _tempShuffled;
 }
 function generating(param1, param2, param3, param4){
 	const _D= new Date()
@@ -311,25 +310,32 @@ function generating(param1, param2, param3, param4){
 	const currentPool = createPool(_Year, _Month)
 	const arrEmpty = []
 	const lowerLetterPool = ShuffleArray(PoolArr[currentPool[0]][0], arrEmpty, _seconds)
-	//const upperLetterPool = ShuffleArray(PoolArr[currentPool[1][1], arrEmpty, _day)
-	const upperLetterPool = ShuffleArray(PoolArr[currentPool[1]][1], _day)
-	const numPool = ShuffleArray(PoolArr[currentPool[2]][2], arrEmpty, _day)
-	const specialPool = ShuffleArray(PoolArr[currentPool[3]][3], arrEmpty, _day)
+	console.log('lowerLetterPool output is:  ' + lowerLetterPool)
+	const upperLetterPool = ShuffleArray(PoolArr[currentPool[1]][1], arrEmpty, _seconds )
+	console.log('upperLetterPool output is:  ' + upperLetterPool)
+	const numPool = ShuffleArray(PoolArr[currentPool[2]][2], arrEmpty, _seconds + _Month)
+	console.log('numPool output is:  ' + numPool)
+	const specialPool = ShuffleArray(PoolArr[currentPool[3]][3], arrEmpty, _seconds + _Year - _day)
+	console.log('specialrPool output is:  ' + specialPool)
 	let _password = ""
 
 	let i = 0
+	const _param1 = _seconds % param4
+	const _param2 = (_param1 + 1) % param4
+	const _param3 = (_param1 + 5) % param4
 	while (i < param4){
-		if (param1 >= 1 && i == 0){
-			_password = _password + upperLetterPool[i].toString()
-		} else if (param2 >= 1 && i == 1){
-			_password = _password + numPool[i].toString()
-		} else  if (param3 >= 1 && i == 2){
-			_password = _password + specialPool[i].toString()
+		if (param1 >= 1 && i == _param1){
+			_password = _password + upperLetterPool[i % upperLetterPool.length].toString()
+		} else if (param2 >= 1 && i == _param2){
+			_password = _password + numPool[i % numPool.length].toString()
+		} else  if (param3 >= 1 && i == _param3){
+			_password = _password + specialPool[i % specialPool.length].toString()
 		} else {
-			_password = _password + lowerLetterPool[i].toString()
+			_password = _password + lowerLetterPool[i % lowerLetterPool.length].toString()
 		}
 		i = i + 1
 	}
+	console.log(_password)
 	return _password
 }
 
