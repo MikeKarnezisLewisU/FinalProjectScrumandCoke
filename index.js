@@ -225,20 +225,19 @@ app.get('/read-cookies', (req, res) => {
 /* ________________________________
   |this is for the final project   | 
   |________________________________|*/
-
-  app.get('/send-Input', (request, response) => {
+  
+app.get('/send-Input', (request, response) => {
 	console.log('Calling "/send-Input" on the Node.js server.')
 	var inputs = url.parse(request.url,true).query
 	const letters = parseInt(inputs.letters)
 	const digits = parseInt(inputs.digits)
-    const specials = parseInt(inputs.specials)
-    const theLeng = parseInt(inputs.theLeng)
-    //Check 
+	const specials = parseInt(inputs.specials)
+	const theLeng = parseInt(inputs.theLeng)
+	//Check 
 	console.log('letters:' + letters)
 	console.log('numbers:' + digits)
-    console.log('specials:' + specials)
+	console.log('specials:' + specials)
 	console.log('theLeng:' + theLeng)
-
 	const _D= new Date()
 	const _Year = _D.getFullYear()
 	const _Month = _D.getMonth()

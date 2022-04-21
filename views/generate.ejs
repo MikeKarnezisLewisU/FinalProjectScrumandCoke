@@ -245,7 +245,7 @@
                 const specials = document.getElementById("mySpecialsText").value
                 const theLeng = document.getElementById("lengthID").value
                 const toSend = [letters, digits, specials, theLeng]
-                console.log("generated variable:", generated)
+                //console.log("generated variable:", generated)
                 console.log("info to send to serverside for generating:",toSend)
                 const response = await fetch('/send-Input?letters='+letters+'&digits='+digits+'&specials='+specials+'&theLeng='+theLeng)
                 const responseText = await response.text()
