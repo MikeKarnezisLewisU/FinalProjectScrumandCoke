@@ -339,6 +339,45 @@ function generating(param1, param2, param3, param4){
 	return _password
 }
 
+function createPool(y, m){
+	const poolNum = (y/m) % 64
+	let lowerTemp = 0
+	let upperTemp = 0
+	let numTemp = 0
+	let specialTemp = 0
+	let i = 0
+	while ( i < poolNum){
+		if (lowerTemp == 2){
+			if (upperTemp != 2){
+				lowerTemp = 0
+				upperTemp = upperTemp + 1
+			}	
+			if (upperTemp == 2){
+				if (numTemp != 2){
+					upperTemp = 0
+					numTemp = numTemp + 1
+				}	
+				else {
+					if (specialTemp != 2){
+						numTemp = 0
+					}	
+					specialTemp = specialTemp + 1	
+				}
+			}
+		}
+		else{
+			lowerTemp = lowerTemp + 1
+		}
+		i = i + 1 
+	}
+
+	const createdPool = [lowerTemp, upperTemp, numTemp, specialTemp]
+	console.log('createdPool is: ' + createdPool)
+
+	return createdPool
+}
+
+
 
 // Custom 404 page.
 app.use((request, response) => {
