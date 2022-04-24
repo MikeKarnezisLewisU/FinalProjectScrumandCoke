@@ -272,6 +272,7 @@ const Pool2 = [lower2, upper2, nums2, special2];
 const Pool3 = [lower3, upper3, nums3, special3];
 const PoolArr = [Pool1, Pool2, Pool3];
 
+// function for creating a random pool to generate passwords from
 function ShuffleArray(tempArray, tempShuffled, keyNum){
 	console.log(tempShuffled)
     _tempArray = [];
@@ -300,12 +301,32 @@ function ShuffleArray(tempArray, tempShuffled, keyNum){
     }
     return _tempShuffled;
 }
-function generating(param1, param2, param3, param4){
+
+//gets the dates for generating a password and sends the parameters and dates to the key maker function
+function dateGetter(param1, param2, param3, param4){
 	const _D= new Date()
 	const _Year = _D.getFullYear()
 	const _Month = _D.getMonth()
 	const _day = _D.getDate()
 	const _seconds = _D.getMilliseconds()
+	const dateList = [_Year, _Month, _day, _seconds]
+	keySetter(param1, param2, param3, param4, dateList)
+	return dateList
+}
+
+// turns key variables into a CSV String to be sent to a database
+function keySetter(param1, param2, param3, param4, dateList){
+	const generatorKey = (param1.toString() + ',' + param2.toString() + ',' + param3.toString() + ',' + param4.toString() + ',' + dateList.toString())
+	console.log(generatorKey)
+}
+
+// The function for generating the password when it is first made
+function generating(param1, param2, param3, param4){
+	const _D = dateGetter(param1, param2, param3, param4)
+	const _Year = _D[0]
+	const _Month = _D[1]
+	const _day = _D[2]
+	const _seconds = _D[3]
 	console.log(_Year + _Month + _day)
 
 	const currentPool = createPool(_Year, _Month)
@@ -340,6 +361,68 @@ function generating(param1, param2, param3, param4){
 	return _password
 }
 
+//converts saved key into an array to be regenerated
+function deCSVKey(keySaved){
+	let keyParam = []
+	let keyLeng = keySaved.length
+	let i = 0
+	let j = 0
+	while (i < keyLeng){
+		if (keyLeng.substr(i + 1) == "," || keyLeng.substr(i + 1) == null){
+			keyParam.push(keyLeng.slice(j, i + 1))
+			j = i + 2
+		}
+		i++
+	}
+	return keyParam
+}
+
+// regenerates passwords from keys saved to the database
+function regenerating(keyParam){
+	const _keyParam = keyParam
+	const param1 = parseInt(_keyParam[0])
+	const param2 = parseInt(_keyParam[1])
+	const param3 = parseInt(_keyParam[2])
+	const param4 = parseInt(_keyParam[3])
+	const _Year = parseInt(_keyParam[4])
+	const _Month = parseInt(_keyParam[5])
+	const _day = parseInt(_keyParam[6])
+	const _seconds = parseInt(_keyParam[7])
+	console.log(_Year + _Month + _day)
+
+	const currentPool = createPool(_Year, _Month)
+	const arrEmpty = []
+	const lowerLetterPool = ShuffleArray(PoolArr[currentPool[0]][0], arrEmpty, _seconds)
+	console.log('lowerLetterPool output is:  ' + lowerLetterPool)
+	const upperLetterPool = ShuffleArray(PoolArr[currentPool[1]][1], arrEmpty, _seconds )
+	console.log('upperLetterPool output is:  ' + upperLetterPool)
+	const numPool = ShuffleArray(PoolArr[currentPool[2]][2], arrEmpty, _seconds + _Month)
+	console.log('numPool output is:  ' + numPool)
+	const specialPool = ShuffleArray(PoolArr[currentPool[3]][3], arrEmpty, _seconds + _Year - _day)
+	console.log('specialrPool output is:  ' + specialPool)
+	let _password = ""
+
+	let i = 0
+	const _param1 = _seconds % param4
+	const _param2 = (_param1 + 1) % param4
+	const _param3 = (_param1 + 5) % param4
+	while (i < param4){
+		if (param1 >= 1 && i == _param1){
+			_password = _password + upperLetterPool[i % upperLetterPool.length].toString()
+		} else if (param2 >= 1 && i == _param2){
+			_password = _password + numPool[i % numPool.length].toString()
+		} else  if (param3 >= 1 && i == _param3){
+			_password = _password + specialPool[i % specialPool.length].toString()
+		} else {
+			_password = _password + lowerLetterPool[i % lowerLetterPool.length].toString()
+		}
+		i = i + 1
+	}
+	console.log(_password)
+	return _password
+}
+
+// function that uses the shuffler and key variables to create the pools for the password
 function createPool(y, m){
 	const poolNum = (y/m) % 64
 	let lowerTemp = 0
