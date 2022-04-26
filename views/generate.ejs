@@ -229,7 +229,7 @@
             * retrieves generated password from sever end
             * No Math allowed script side
             */ 
-            var password = "" //Make password global to use in other functions
+            var password = "" //Make password global to use in other functions (so save function can save a password generated in the sendCommand() function)
 
             async function sendCommand(){
                 password = await sendInput()
