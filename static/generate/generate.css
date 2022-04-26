@@ -272,6 +272,9 @@ li a:hover {
 
 /*CSS for the save button*/
 #saveButton {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
     position: absolute;
-    left: 600px;
+    top: 830px;
+    left: 690px;
 }

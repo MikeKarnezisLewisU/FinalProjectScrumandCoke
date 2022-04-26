@@ -195,6 +195,11 @@
     <!--Button to generate a password-->
     <button type="button" id="btnGenerate" onclick="sendCommand()" value="run external javascript">Send</button> 
 
+    <!--Show the save option only when a user is logged in-->
+    <% if (user) { %>
+        <button type="button" id="saveButton" onclick=savePassword() style="visibility:hidden;">Save Password</button>
+    <% } %>
+
     <!--Github information-->
     <a class="github" href="https://github.com/MikeKarnezisLewisU/FinalProjectScrumandCoke"><img src="github.svg"></a>
 
@@ -208,7 +213,6 @@
         <% if (user) { %>
             <li><a href="/profile" id="profile">Profile</a></li>
             <li><a href="/logout" id="logout">Logout</a></li>
-            <button type="button" id="saveButton" onclick=savePassword() style="visibility:hidden;">Save Password</button>
         <% } else { %>
             <li><a href="/login" id="login">Login</a></li>
             <li><a href="/signup" id="signup">Sign Up</a></li>
@@ -218,6 +222,10 @@
     <!--Welcome the current user if they exist (must be conditional then)-->
     <% if (user) { %>
         <p id="welcomeUser">Welcome, <%= user.email %></p>
+
+        <!--Hidden element to be able to access the current user name-->
+        <p id="currentUser" hidden><%= user.email %></p>
+
     <% } %>
 
 
@@ -260,9 +268,9 @@
 
 
             //Function to save a password
-            async function savePassword() {
+            async function savePassword(userEmail) {
                 console.log("Clicked save password button.")
-
+                userEmail = document.getElementById("currentUser").innerText
                 
                 if (password == "") {
                     console.log("Undefined Password!!!!")
@@ -270,6 +278,16 @@
                 
                 //LEAVE OFF HERE FOR JACK
                 console.log(password) //Check to see if the correct password is coming in SUCCESS GET PASSWORD SAVED TO DB!!
+
+                //Find the email of current user
+                console.log("The current user:", userEmail, "type is:", typeof(userEmail))
+
+                //Now add to the saved passwords array in the database
+                //Need to use encodeURIComponent(password) in order to send special chracters over to the server side
+                const saving = await fetch('/save-password?password='+encodeURIComponent(password)+'&email='+encodeURIComponent(userEmail))
+                const responseText = await saving.text()
+
+                console.log("Out of the server", responseText)
 
                 //Hide the save button after saving a current password so you don't repeat saving the same password
                 document.getElementById("saveButton").style.visibility = "hidden"

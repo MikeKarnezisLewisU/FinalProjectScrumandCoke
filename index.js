@@ -20,6 +20,11 @@ const authRoutes = require('./routes/authRoutes')
 const cookieParser = require('cookie-parser')
 //Used as a requirement to only show pages or page details according to this
 const { requireAuth, checkUser } = require('./middleware/authMiddleware')
+
+//Be able to access the Schema for saving passwords
+const userSchema = require('./models/user');
+const { db } = require('./models/user');
+
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static('static'))
 app.use(express.json()) //Takes data passed by user and attaches to request object in the handler
@@ -462,6 +467,29 @@ function createPool(y, m){
 }
 
 
+//FUNCTION TO SAVE A PASSWORD TO THE DATABASE
+app.get('/save-password', async (request, response) => {
+	console.log('Calling "/save-password" on the Node.js server.')
+	var inputs = url.parse(request.url,true).query
+	console.log("The inputs string:", inputs.password)
+	const password = inputs.password
+	const userEmail = inputs.email
+
+	console.log("The password is on the server side and it's:", password)
+	console.log("The email is on the server side and it's:", userEmail)
+
+	//Save the password to proper user in MongoDB WORKS!!
+	await userSchema.findOneAndUpdate({
+		email: userEmail.trim()
+	}, {
+		$push: { //Use $push MongoDB function to push the password to the array
+			savedPass: password
+		}
+	}
+)
+	
+	response.send("Password Saved!")
+})
 
 // Custom 404 page.
 app.use((request, response) => {

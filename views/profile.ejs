@@ -53,6 +53,18 @@
     <!--Welcome the current user if they exist (must be conditional then)-->
     <% if (user) { %>
         <p id="welcomeUser">Welcome, <%= user.email %></p>
+
+        <!--For loop to loop through the passwords making a list of them-->
+        <table class="passwordList" style="width:10%;">
+            <tr>
+                <td id="listHeader">Saved Passwords</td>
+            </tr>
+            <% for(var i=0; i<user.savedPass.length; i++) {%>
+                <tr>
+                    <td id="passwords"><%= user.savedPass[i] %></td>
+                </tr>
+            <% } %>
+        </table>
     <% } %>
    </body>
 </html>
