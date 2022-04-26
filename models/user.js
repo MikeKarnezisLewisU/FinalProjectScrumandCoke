@@ -20,6 +20,16 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please give a password'],
         minlength: [6, 'Minimum password length is 6 characters'] //User password can't be less than 6 characters long
     },
+
+
+    //Attempt 1 at adding list to schema THIS MIGHT WORK --> WORK IN PROGRESS
+    savedPass: {
+        type: [String],
+        required: false
+    }
+    //Attempt 1 at adding list to schema THIS MIGHT WORK --> WORK IN PROGRESS
+
+    
 })
 
 

@@ -122,6 +122,7 @@ module.exports.login_post = async (req, res) => {
     }
 }
 
+
 module.exports.logout_get = (req, res) => {
     //We need to now delete the JWT cookie for the current user 
     //Can't delete it so we will replace it with a blank cookie with a short expire

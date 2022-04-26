@@ -269,3 +269,9 @@ li a:hover {
     -webkit-text-stroke: .6px black;
     -webkit-text-fill-color: rgb(255, 255, 255);
 }
+
+/*CSS for the save button*/
+#saveButton {
+    position: absolute;
+    left: 600px;
+}
