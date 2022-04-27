@@ -12,7 +12,7 @@ const requireAuth = (req, res, next) => {
     //Check if we have the token
     if (token) {
         //Verify the token (token, secret (matches secret before))
-        jwt.verify(token, 'net ninja secret', (err, decodedToken) => {
+        jwt.verify(token, 'jiashdfuodbiyasgudhoausbfiuaosfdabsfaosdbaiusfbajsuf', (err, decodedToken) => {
             //If there's an error the token is not valid and we need to redirect
             if (err) {
                 console.log(err.message)
@@ -40,7 +40,7 @@ const checkUser = (req, res, next) => {
         //Verify token if we have one
         
         //Verify the token (token, secret (matches secret before))
-        jwt.verify(token, 'net ninja secret', async (err, decodedToken) => {
+        jwt.verify(token, 'jiashdfuodbiyasgudhoausbfiuaosfdabsfaosdbaiusfbajsuf', async (err, decodedToken) => {
             //If there's an error the token is not valid and we need to redirect
             if (err) {
                 console.log(err.message)

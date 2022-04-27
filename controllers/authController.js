@@ -49,7 +49,7 @@ const maxAge = 3 * 24 * 60 * 60 //Value of three days in seconds
 const createToken = (id) => {
     //id comes from the user object (_id property)
     //Sign the jwt to create {payload}, secret
-    return jwt.sign({ id }, 'net ninja secret', {
+    return jwt.sign({ id }, 'jiashdfuodbiyasgudhoausbfiuaosfdabsfaosdbaiusfbajsuf', {
         expiresIn: maxAge
     })
 }
