@@ -72,7 +72,7 @@ app.get('/generate', (request, response) => {
 	response.render('generate.ejs')
 })
 
-//DON'T DELETE; THIS IS THE HEALTH INSURANCE SITE WE NEEDED TO ATTACH
+//DON'T DELETE; THIS IS THE About SITE WE NEEDED TO ATTACH
 app.get('/about', (request, response) => {
 	response.render('about.ejs')
 })

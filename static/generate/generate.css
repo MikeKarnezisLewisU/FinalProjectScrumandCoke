@@ -261,7 +261,7 @@ li a:hover {
 /*Move the welcome user message and change the font*/
 #welcomeUser {
     position: absolute;
-    top: 17.4%;
+    top: 25%;
     left: 1%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 22px;
@@ -277,4 +277,12 @@ li a:hover {
     position: absolute;
     top: 830px;
     left: 690px;
+}
+
+.logo {
+    position: absolute;
+    top: 2%;
+    left: 80%;
+    width:10%;
+    height:auto;
 }

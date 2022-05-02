@@ -142,3 +142,11 @@ td {
     color: rgb(45, 11, 238);
     background-color: white;
 }
+
+.logo {
+    position: absolute;
+    top: 2%;
+    left: 80%;
+    width:10%;
+    height:auto;
+}
