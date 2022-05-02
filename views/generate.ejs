@@ -197,7 +197,7 @@
 
     <!--Show the save option only when a user is logged in-->
     <% if (user) { %>
-        <button type="button" id="saveButton" onclick=savePassword() style="visibility:hidden;">Save Password</button>
+        <button type="button" id="saveButton" onclick="savePassword()" style="visibility:hidden;">Save Password</button>
     <% } %>
 
     <!--Github information-->
@@ -244,8 +244,17 @@
                 document.getElementById("generate_output").innerHTML = password
                 console.log("Password in the sendCommand:", password)
 
-                //Make the save button visible whenever a password is generated
-                document.getElementById("saveButton").style.visibility = "visible"
+                //Make the save button visible whenever a password is generated and user is signed in
+                try {
+                    //If we are able to get a current user than we should make the save button visible to them when they generate a password
+                    currentUser = document.getElementById("currentUser").innerHTML
+                    //console.log(typeof(currentUser))
+                    //console.log("Current User: " + currentUser)
+                    document.getElementById("saveButton").style.visibility = "visible"
+                } catch {
+                    console.log("No user logged in.")
+                }
+                
             }
 
             /* 
