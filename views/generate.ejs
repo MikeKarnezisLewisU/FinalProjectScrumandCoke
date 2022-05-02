@@ -3,17 +3,16 @@
 <!DOCTYPE html>
 <html lang='en'>
  <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet"
         type="text/css"
         href="generate.css">
     <title>Generator</title>
  </head>
  <body>
-
-
     <!--Title-->
     <header>
+    <img class="logo" src="/images/teamLogo.png" alt="Team Logo"/>
     <div class="flexbox-container">
         <div class="flexbox-item flexbox-item-1">
             <h1 id="title">Generator</h1>  
@@ -41,7 +40,7 @@
             <h1 id="paramTitle">Parameters</h1>
         </div>
     </div>
-
+    
     <!--Parameter for how many characters the user wants to use-->
     <div class="passLength">
         <label id="passLen">Password Length:</label>
@@ -207,7 +206,7 @@
     <ul class="horzbar">
         <li><a href="/" id="home">Home</a></li>
         <li><a href="/generate" id="generate">Generate</a></li>
-        <li><a href="https://red-smoke-0bebce010.1.azurestaticapps.net/" id="about">About</a></li>
+        <li><a href="/about" id="about">About</a></li>
   
         <!--To go to the login page or signup page (need to make conditionally using ejs properties)-->
         <% if (user) { %>
