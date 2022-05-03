@@ -131,13 +131,17 @@ li a:hover {
 }
 
 #emailLabel {
+    position: absolute;
+    left: 5%;
     font-size: 20px;
     font-weight: 800;
 }
 
 #passLabel {
+    position: absolute;
     font-size: 20px;
-    text-align: left;
+    left: 5%;
+    top: 50%;
     font-weight: 800;
 }
 
@@ -148,10 +152,25 @@ li a:hover {
     text-align: center;
     -webkit-text-stroke: 0px black;
     -webkit-text-fill-color: black;
+    position: absolute;
+    top: 80%;
+    left: 35%;
 }
 
 input[type=text] {
+    position: absolute;
+    left: 38%;
+    top: 34%;
     font-size: 15px;
+    -webkit-text-stroke: 0px black;
+    -webkit-text-fill-color: black;
+  }
+
+  input[type=password] {
+    position: absolute;
+    left: 38%;
+    font-size: 15px;
+    top: 51%;
     -webkit-text-stroke: 0px black;
     -webkit-text-fill-color: black;
   }
