@@ -342,7 +342,8 @@ function generating(param1, param2, param3, param4){
 	console.log('upperLetterPool output is:  ' + upperLetterPool)
 	const numPool = ShuffleArray(PoolArr[currentPool[2]][2], arrEmpty, _seconds + _Month)
 	console.log('numPool output is:  ' + numPool)
-	const specialPool = ShuffleArray(PoolArr[currentPool[3]][3], arrEmpty, _seconds + _Year - _day)
+	//console.log("POOL ARRAY: " + ShuffleArray(PoolArr[currentPool[2]][3], arrEmpty, _seconds )) ERROR CHECK
+	const specialPool = ShuffleArray(PoolArr[currentPool[2]][3], arrEmpty, _seconds + _Year - _day)
 	console.log('specialrPool output is:  ' + specialPool)
 	let _password = ""
 
