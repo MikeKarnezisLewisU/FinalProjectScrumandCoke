@@ -19,7 +19,7 @@
      <!--Github information-->
      <a class="github" href="https://github.com/MikeKarnezisLewisU/FinalProjectScrumandCoke"><img src="github.svg"></a>
 
-        <img class="logo" src="/images/teamLogo.png" alt="Team Logo"/>
+        <!--<img class="logo" src="/images/teamLogo.png" alt="Team Logo"/>-->
         <!--Navigation Bar-->
     <ul class="horzbar">
         <li><a href="/" id="home">Home</a></li>
@@ -42,15 +42,15 @@
     <% } %>
         <!--Form for signing up user and error messages-->
         <!--ADD CSS LATER-->
-        <form>
+        <form class="signForm">
             <h2>Sign up</h2>
-            <label for="email">Email</label>
+            <label for="email" id="emailLabel">Email</label>
             <input type="text" name="email" required />
             <div class="email error"></div>
-            <label for="password">Password</label>
+            <label for="password" id="passLabel">Password</label>
             <input type="password" name="password" required />
             <div class="password error"></div>
-            <button>Sign up</button> <!--Submit event will automatically be done-->
+            <button id="subLog">Sign up</button> <!--Submit event will automatically be done-->
         </form>
     
     <script>
